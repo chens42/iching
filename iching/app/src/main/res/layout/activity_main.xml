@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_iching_logo"
+        android:rotation="180" />
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:textSize="20sp"
+        android:textColor="@color/navy_blue"
+        android:text="@string/welcome_string"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true">
+
+            <Button
+                android:id="@+id/hexagrams"
+                android:text="Hexagrams"
+                style="@style/first_page_button_style" />
+
+            <Button
+                style="@style/first_page_button_style"
+                android:text="Consult Oracle"/>
+
+            <Button
+                style="@style/first_page_button_style"
+                android:text="My Divinations"/>
+
+            <Button
+                style="@style/first_page_button_style"
+                android:text="Hex by Trigram" />
+
+            <Button
+                style="@style/first_page_button_style"
+                android:text="About" />
+
+            <Button
+                style="@style/first_page_button_style"
+                android:text="Exit"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

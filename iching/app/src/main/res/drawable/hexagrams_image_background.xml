@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#108bcc7b" />
+            <padding android:top="@dimen/padding_width" android:right="@dimen/padding_width" android:bottom="@dimen/padding_width" android:left="@dimen/padding_width" />
+
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="#2032cc30" />
+            <padding android:top="@dimen/padding_width" android:right="@dimen/padding_width" android:bottom="@dimen/padding_width" android:left="@dimen/padding_width" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="#3032cc30" />
+            <padding android:top="@dimen/padding_width" android:right="@dimen/padding_width" android:bottom="@dimen/padding_width" android:left="@dimen/padding_width" />
+
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <solid android:color="#80b8ff19" />
+        </shape>
+    </item>
+</layer-list>

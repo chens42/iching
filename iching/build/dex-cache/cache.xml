@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/home/shaojin/dev/android-project/android-practise.git/iching/app/build/pre-dexed/debug/ormlite-android-4.48-8b7023c799aa6afd2c1656072113ffd3d224872f.jar"
+        jar="/home/shaojin/.gradle/caches/modules-2/files-2.1/com.j256.ormlite/ormlite-android/4.48/afa06f539a4026c10b247386312aa67404b80a16/ormlite-android-4.48.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="afa06f539a4026c10b247386312aa67404b80a16"/>
+    <item
+        dex="/home/shaojin/dev/android-project/android-practise.git/iching/app/build/pre-dexed/debug/ormlite-core-4.48-ef214b28bc229dde5910983db242fb4eb3d8247e.jar"
+        jar="/home/shaojin/.gradle/caches/modules-2/files-2.1/com.j256.ormlite/ormlite-core/4.48/e579bd2905d0399af5029aaaf9817d5fa0ca88a5/ormlite-core-4.48.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5"/>
+
+</pre-dex-items>
