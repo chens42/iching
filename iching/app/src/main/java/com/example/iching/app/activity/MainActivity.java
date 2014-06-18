@@ -25,7 +25,7 @@ public class MainActivity extends IChingBaseActivity implements Animation.Animat
         setContentView(R.layout.activity_main);
 
 
-        MusicControl.play(getApplicationContext(),R.raw.bg);
+        MusicControl.play(getApplicationContext(), R.raw.bg);
 
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_spin);
         icon = (ImageView) findViewById(R.id.icon);
@@ -39,7 +39,8 @@ public class MainActivity extends IChingBaseActivity implements Animation.Animat
             }
         });
     }
-    private void dataBaseCreate(){
+
+    private void dataBaseCreate() {
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 //        Hex hex = new Hex(1,);
     }
@@ -49,6 +50,7 @@ public class MainActivity extends IChingBaseActivity implements Animation.Animat
         MusicControl.stop(this);
         super.finish();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);

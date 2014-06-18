@@ -1,13 +1,11 @@
 package com.example.iching.app.activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -16,21 +14,18 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.iching.app.R;
 import com.example.iching.app.db.DatabaseHelper;
 import com.example.iching.app.model.Hex;
-import com.example.iching.app.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HexagramsActivity extends IChingBaseActivity {
-    List<Hex> hexes;
-    GridView gridView;
+    private GridView gridView;
     private HexagramAdapter adapter;
-    DatabaseHelper helper;
-    Animation anim;
-    Hex hex;
-    ListView hexagramListView;
+    private DatabaseHelper helper;
+    private Animation anim;
+    private ListView hexagramListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,48 +33,28 @@ public class HexagramsActivity extends IChingBaseActivity {
         setContentView(R.layout.hexagrams);
         helper = new DatabaseHelper(getApplicationContext());
         setTitle("64 Hexagrams");
-        hexes = new ArrayList<Hex>();
+        List<Hex> hexes;
 
         if (helper.getPostDAO().queryForAll() == null) {
             databaseCreate();
         }
         hexes = helper.getPostDAO().queryForAll();
-
-
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.switch_gridview_listview_dialog);
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
+        final View dialogView = getLayoutInflater().inflate(R.layout.switch_gridview_listview_dialog, null);
+        dialog.setView(dialogView);
         dialog.setTitle("change display");
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.width = 500;
-        lp.height = 300;
-        dialog.getWindow().setAttributes(lp);
-
-
-        hexagramListView= (ListView) findViewById(R.id.hexagramsDisplayListView);
+        hexagramListView = (ListView) findViewById(R.id.hexagramsDisplayListView);
         gridView = (GridView) findViewById(R.id.hexagramsDisplay);
         anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.drop_down);
         adapter = new HexagramAdapter(this, hexes);
         gridView.setAdapter(adapter);
         anim.start();
-        gridView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(HexagramsActivity.this, HexagramsDisplayActivity.class);
-                intent.putExtra(HexagramsDisplayActivity.ID_IN, position);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        gridView.setOnItemClickListener(hexagramClick());
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
                 dialog.show();
-                dialog.findViewById(R.id.listview).setOnClickListener(new View.OnClickListener() {
+                dialogView.findViewById(R.id.listViewDisplay).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         gridView.setVisibility(View.GONE);
@@ -88,15 +63,15 @@ public class HexagramsActivity extends IChingBaseActivity {
                         dialog.dismiss();
                     }
                 });
-                dialog.findViewById(R.id.gridview).setOnClickListener(dontchangedisplay(dialog));
-                return false;
+                dialogView.findViewById(R.id.gridViewDisplay).setOnClickListener(noChangeDisplay(dialog));
+                return true;
             }
         });
         hexagramListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.show();
-                dialog.findViewById(R.id.gridview).setOnClickListener(new View.OnClickListener() {
+                dialogView.findViewById(R.id.gridViewDisplay).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         gridView.setVisibility(View.VISIBLE);
@@ -104,24 +79,35 @@ public class HexagramsActivity extends IChingBaseActivity {
                         dialog.dismiss();
                     }
                 });
-                dialog.findViewById(R.id.listview).setOnClickListener(dontchangedisplay(dialog));
+                dialogView.findViewById(R.id.listViewDisplay).setOnClickListener(noChangeDisplay(dialog));
                 return false;
             }
         });
+        hexagramListView.setOnItemClickListener(hexagramClick());
     }
 
-    private View.OnClickListener dontchangedisplay(final Dialog dialog) {
-        View.OnClickListener onClickListener = new View.OnClickListener() {
+    private AdapterView.OnItemClickListener hexagramClick() {
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(HexagramsActivity.this, HexagramsDisplayActivity.class);
+                intent.putExtra(HexagramsDisplayActivity.ID_IN, position);
+                startActivity(intent);
+            }
+        };
+    }
+
+    private View.OnClickListener noChangeDisplay(final AlertDialog dialog) {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         };
-        return onClickListener;
     }
 
     private void databaseCreate() {
-        hex = new Hex(1, "Hexagram 1 is named 乾 (qián), \"Force\". Other variations include \"the creative\", \"strong action\", \"the key\", and \"god\". Its inner (lower) trigram is ☰ (乾 qián) force = (天) heaven, and its outer (upper) trigram is the same.", "乾（拼音：qián，注音：ㄑㄧㄢˊ，中古拼音：gien），六十四卦之首。上下皆由相同的乾卦组成Trigramme2630 ☰.svg，其六个爻皆为阳。通称“乾为天”。 代表“天”的形象。置于六十四卦之首、其次是象征“地”的坤卦，序卦传：天地定位、万物生焉。", R.drawable.hex1, "111111");
+        Hex hex = new Hex(1, "Hexagram 1 is named 乾 (qián), \"Force\". Other variations include \"the creative\", \"strong action\", \"the key\", and \"god\". Its inner (lower) trigram is ☰ (乾 qián) force = (天) heaven, and its outer (upper) trigram is the same.", "乾（拼音：qián，注音：ㄑㄧㄢˊ，中古拼音：gien），六十四卦之首。上下皆由相同的乾卦组成Trigramme2630 ☰.svg，其六个爻皆为阳。通称“乾为天”。 代表“天”的形象。置于六十四卦之首、其次是象征“地”的坤卦，序卦传：天地定位、万物生焉。", R.drawable.hex1, "111111");
         helper.getPostDAO().create(hex);
         hex = new Hex(2, "Hexagram 2 is named 坤 (kūn), \"Field\". Other variations include \"the receptive\", \"acquiescence\", and \"the flow\". Its inner trigram is ☷ (坤 kūn) field = (地) earth, and its outer trigram is identical.", "坤（拼音：kūn，注音：ㄎㄨㄣ，中古拼音：khuon），六十四卦中排行第二之卦。上下皆是由坤卦组成Trigramme2637 ☷.svg，六个爻皆是阴爻。通称为“坤为地”。象征“大地”、与天共同孕育万物之生成。", R.drawable.hex2, "000000");
         helper.getPostDAO().create(hex);
@@ -138,11 +124,9 @@ public class HexagramsActivity extends IChingBaseActivity {
         hex = new Hex(8, "Hexagram 8 is named 比 (bǐ), \"Grouping\". Other variations include \"holding together\" and \"alliance\". Its inner trigram is ☷ (坤 kūn) field = (地) earth, and its outer trigram is ☵ (坎 kǎn) gorge = (水) water.", "比，六十四卦中第八卦。外卦（上卦）Trigramme2635 ☵.svg坎、内卦（下卦）Trigramme2637 ☷.svg坤。因为代表水的坎卦在上、代表地的坤卦在下，故通称为“水地比”。比为比邻，亲近友好之意，起兵兴师后同群之人为“比”。", R.drawable.hex8, "010000");
         helper.getPostDAO().create(hex);
         hex = new Hex(9, "Hexagram 9 is named 小畜 (xiǎo chù), \"Small Accumulating\". Other variations include \"the taming power of the small\" and \"small harvest\". Its inner trigram is ☰ (乾 qián) force = (天) heaven, and its outer trigram is ☴ (巽 xùn) ground = (風) wind.", "小畜（“畜”，拼音：xù，注音：ㄒㄩˋ，中古拼音：hiuk），六十四卦中第九卦。内卦（下卦）Trigramme2630 ☰.svg乾、外卦（上卦）Trigramme2634 ☴.svg巽。通称“风天小畜”。小畜有集合之意，人们亲近后开始集合", R.drawable.hex9, "110111");
-
         helper.getPostDAO().create(hex);
         hex = new Hex(10, "Hexagram 10 is named 履 (lǚ), \"Treading\". Other variations include \"treading (conduct)\" and \"continuing\". Its inner trigram is ☱ (兌 duì) open = (澤) swamp, and its outer trigram is ☰ (乾 qián) force = (天) heaven.", "履，六十四卦中第十卦。内卦（下卦）Trigramme2631 ☱.svg兑、外卦（上卦）Trigramme2630 ☰.svg乾。通称“天泽履”。履为踩踏之意，序卦传另云：履者礼也。", R.drawable.hex10, "111011");
         helper.getPostDAO().create(hex);
-
         hex = new Hex(11, "Hexagram 11 is named 泰 (tài), \"Pervading\". Other variations include \"peace\" and \"greatness\". Its inner trigram is ☰ (乾 qián) force = (天) heaven, and its outer trigram is ☷ (坤 kūn) field = (地) earth.", "泰，六十四卦中第十一卦。内卦（下卦）Trigramme2630 ☰.svg乾、外卦（上卦）Trigramme2637 ☷.svg坤。通称“地天泰”。泰为通达之意。", R.drawable.hex11, "000111");
         helper.getPostDAO().create(hex);
         hex = new Hex(12, "Hexagram 12 is named 否 (pǐ), \"Obstruction\". Other variations include \"standstill (stagnation)\" and \"selfish persons\". Its inner trigram is ☷ (坤 kūn) field = (地) earth, and its outer trigram is ☰ (乾 qián) force = (天) heaven.", "否（拼音：pǐ，中古拼音：biix），六十四卦中第十二卦。内卦（下卦）Trigramme2637 ☷.svg坤、外卦（上卦）Trigramme2630 ☰.svg乾。通称“天地否”。否为闭“塞”之意。", R.drawable.hex12, "111000");
@@ -252,7 +236,6 @@ public class HexagramsActivity extends IChingBaseActivity {
         helper.getPostDAO().create(hex);
         hex = new Hex(64, "Hexagram 64 is named 未濟 (wèi jì), \"Not Yet Fording\". Other variations include \"before completion\" and \"not yet completed\". Its inner trigram is ☵ (坎 kǎn) gorge = (水) water, and its outer trigram is ☲ (離 lí) radiance = (火) fire.", "未济，六十四卦中最后一卦。内卦（下卦）Trigramme2635 ☵.svg坎、外卦（上卦）Trigramme2632 ☲.svg离。因为上卦是代表火的离卦、下卦是代表水的坎卦，所以通称为“火水未济”。代表“事未成”之意。", R.drawable.hex64, "101010");
         helper.getPostDAO().create(hex);
-
     }
 
 
@@ -264,7 +247,6 @@ public class HexagramsActivity extends IChingBaseActivity {
             mContext = c;
             this.list = List;
         }
-
 
         @Override
         public int getCount() {
@@ -281,14 +263,12 @@ public class HexagramsActivity extends IChingBaseActivity {
             return 0;
         }
 
-        // create a new ImageView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
             ImageView imageView;
             if (convertView == null) {  // if it's not recycled, initialize some attributes
                 imageView = new ImageView(mContext);
                 imageView.setPadding(10, 10, 10, 10);
                 imageView.setAnimation(anim);
-                imageView.getAnimation().setDuration(position * 100 + 1000);
             } else {
                 imageView = (ImageView) convertView;
             }

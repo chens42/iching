@@ -4,4 +4,6 @@
     <string name="app_name">iching</string>
     <string name="welcome_string">Welcome to IChing</string>
     <string name="action_settings">Settings</string>
+    <string name="dialog_gridView_indicator">GridView</string>
+    <string name="dialog_listView_indicator">ListView</string>
 </resources>

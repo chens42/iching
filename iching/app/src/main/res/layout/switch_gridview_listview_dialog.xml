@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:divider="@color/black">
+>
 
     <TextView
-        android:id="@+id/gridview"
-        android:text="GridView"
-        style="@style/dialog_content_textview" />
+        android:id="@+id/gridViewDisplay"
+        android:text="@string/dialog_gridView_indicator"
+        style="@style/dialog_content_textView" />
 
     <TextView
-        style="@style/dialog_content_textview"
-        android:text="ListView"
-        android:id="@+id/listview" />
+        style="@style/dialog_content_textView"
+        android:text="@string/dialog_listView_indicator"
+        android:id="@+id/listViewDisplay" />
 
 </LinearLayout>
