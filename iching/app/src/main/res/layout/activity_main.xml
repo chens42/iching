@@ -43,11 +43,13 @@
 
             <Button
                 style="@style/first_page_button_style"
+                android:id="@+id/consultOracle"
                 android:text="Consult Oracle"/>
 
             <Button
                 style="@style/first_page_button_style"
-                android:text="My Divinations"/>
+                android:text="My Divinations"
+                android:id="@+id/divinationShow"/>
 
             <Button
                 style="@style/first_page_button_style"

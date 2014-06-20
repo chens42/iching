@@ -1,4 +1,4 @@
-package com.example.iching.app;
+package com.example.iching.app.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.iching.app.R;
 import com.example.iching.app.model.Hex;
 
 public class HexagramFragment  extends Fragment{

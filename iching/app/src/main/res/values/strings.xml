@@ -6,4 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="dialog_gridView_indicator">GridView</string>
     <string name="dialog_listView_indicator">ListView</string>
+    <string name="consult_oracle_description">Enter a question you want to consult IChing with,and  later you can save it.After casting,you can click on hexagrams\'s title to get reading</string>
+    <string name="consult_oracle_casting_original_text">Original</string>
+    <string name="consult_oracle_casting_relating_text">Relating</string>
 </resources>

@@ -17,5 +17,7 @@
         </activity>
         <activity android:name=".activity.HexagramsActivity"/>
         <activity android:name=".activity.HexagramsDisplayActivity"/>
+        <activity android:name=".activity.ConsultOracle"/>
+        <activity android:name=".activity.DivinationActivity"/>
     </application>
 </manifest>

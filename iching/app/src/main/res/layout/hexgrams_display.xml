@@ -9,11 +9,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        android:orientation="horizontal"
+        android:gravity="end">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/englishIndicator"
+            android:background="@drawable/us_indicator"
+            android:layout_marginRight="20dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mandarinIndicator"
+            android:background="@drawable/cn_indicator"/>
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"

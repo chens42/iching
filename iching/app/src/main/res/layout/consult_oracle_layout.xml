@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/divination" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/navy_blue"
+        android:text="@string/consult_oracle_description" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/consultOracleEditTextView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:gravity="center_horizontal"
+                android:text="@string/consult_oracle_casting_original_text" />
+
+            <ImageView
+                android:id="@+id/cast6"
+                style="@style/original_casting_style" />
+
+            <ImageView
+                android:id="@+id/cast5"
+                style="@style/original_casting_style" />
+
+            <ImageView
+                android:id="@+id/cast4"
+                style="@style/original_casting_style" />
+
+            <ImageView
+                android:id="@+id/cast3"
+                style="@style/original_casting_style" />
+
+            <ImageView
+                android:id="@+id/cast2"
+                style="@style/original_casting_style" />
+
+            <ImageView
+                android:id="@+id/cast1"
+                style="@style/original_casting_style" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:src="@drawable/default_coin"
+                    style="@style/coin_consult_oracle_style" />
+
+                <ImageView
+                    android:src="@drawable/default_coin"
+                    style="@style/coin_consult_oracle_style" />
+
+                <ImageView
+                    android:src="@drawable/default_coin"
+                    style="@style/coin_consult_oracle_style" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/navy_blue"
+                android:text="@string/consult_oracle_casting_relating_text" />
+
+            <ImageView
+                android:id="@+id/relative6"
+                style="@style/relating_casting_style" />
+
+            <ImageView
+                android:id="@+id/relative5"
+                style="@style/relating_casting_style" />
+
+            <ImageView
+                android:id="@+id/relative4"
+                style="@style/relating_casting_style" />
+
+            <ImageView
+                android:id="@+id/relative3"
+                style="@style/relating_casting_style" />
+
+            <ImageView
+                android:id="@+id/relative2"
+                style="@style/relating_casting_style" />
+
+            <ImageView
+                android:id="@+id/relative1"
+                style="@style/relating_casting_style" />
+
+
+            <Button
+                android:text="Toss"
+                android:id="@+id/tossButton"
+                style="@style/consult_oracle_button_style" />
+            <Button
+                style="@style/consult_oracle_button_style"
+                android:text="save"
+                android:id="@+id/saveButton"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

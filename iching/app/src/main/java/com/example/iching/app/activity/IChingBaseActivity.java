@@ -8,7 +8,7 @@ public abstract class IChingBaseActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        MusicControl.pause(this);
+//        MusicControl.pause(this);
     }
 
     @Override

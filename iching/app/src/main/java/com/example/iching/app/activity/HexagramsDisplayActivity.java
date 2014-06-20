@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.iching.app.HexagramFragment;
+import com.example.iching.app.fragment.HexagramFragment;
 import com.example.iching.app.R;
 import com.example.iching.app.db.DatabaseHelper;
 import com.example.iching.app.listener.OnSwipeTouchListener;
@@ -33,14 +33,12 @@ public class HexagramsDisplayActivity extends IChingBaseActivity {
         itemId = getIntent().getIntExtra(ID_IN, -1);
         final Bundle bundle = new Bundle();
 
-
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         HexagramFragment hexagramFragment = new HexagramFragment();
         bundle.putParcelable(HexagramFragment.HEX_IN, hexList.get(itemId));
         hexagramFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.hexagramDisplayContent, hexagramFragment);
         fragmentTransaction.commit();
-
 
         mainLayout.setOnTouchListener(new OnSwipeTouchListener(this) {
             @Override

@@ -23,7 +23,7 @@
         <item name="android:textSize">15sp</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
-        <item name="android:background">@drawable/button_background</item>
+        <item name="android:background">@drawable/button_state_style</item>
     </style>
 
     <style name="title_style">
@@ -38,6 +38,33 @@
         <item name="android:textSize">20sp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="original_casting_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/yang</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+    <style name="relating_casting_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/yang</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+    <style name="coin_consult_oracle_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="consult_oracle_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">50dp</item>
+        <item name="android:layout_marginRight">50dp</item>
+        <item name="android:background">@drawable/transparent_50_button</item>
     </style>
 
 </resources>
