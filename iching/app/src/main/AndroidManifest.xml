@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainContentActivity" />
         <activity android:name=".activity.HexagramsActivity" />
         <activity android:name=".activity.HexagramsDisplayActivity" />
         <activity android:name=".activity.ConsultOracle" />
