@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.example.iching.app.R;
 import com.example.iching.app.db.DatabaseHelper;
@@ -34,12 +32,9 @@ public class MainActivity extends IChingBaseActivity implements Animation.Animat
         if (helper.getPostDAO().queryForAll().isEmpty()) {
             new createDatabase().execute();
         }
-
-
         MusicControl.play(getApplicationContext(), R.raw.bg);
-
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_spin);
-        icon = (ImageView) findViewById(R.id.icon);
+        icon = (ImageView) findViewById(R.id.icon2);
         icon.setAnimation(animRotate);
         Button hexagramsButton = (Button) findViewById(R.id.hexagrams);
         hexagramsButton.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +61,6 @@ public class MainActivity extends IChingBaseActivity implements Animation.Animat
             }
         });
     }
-
 
     @Override
     public void finish() {
@@ -256,5 +250,6 @@ public class MainActivity extends IChingBaseActivity implements Animation.Animat
             progressBar.hide();
         }
     }
+
 
 }

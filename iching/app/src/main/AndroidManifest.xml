@@ -8,16 +8,17 @@
         android:label="@string/app_name"
         android:theme="@style/app_theme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.PreloadedActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HexagramsActivity"/>
-        <activity android:name=".activity.HexagramsDisplayActivity"/>
-        <activity android:name=".activity.ConsultOracle"/>
-        <activity android:name=".activity.DivinationActivity"/>
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.HexagramsActivity" />
+        <activity android:name=".activity.HexagramsDisplayActivity" />
+        <activity android:name=".activity.ConsultOracle" />
+        <activity android:name=".activity.DivinationActivity" />
     </application>
 </manifest>

@@ -13,6 +13,9 @@ import com.example.iching.app.db.DivinationDatabaseHelper;
 import com.example.iching.app.model.DivinationObject;
 import com.example.iching.app.model.Hex;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ConsultOracle extends IChingBaseActivity {
     private int counter = 0;
     private Button tossButton;
@@ -20,6 +23,8 @@ public class ConsultOracle extends IChingBaseActivity {
     private DivinationDatabaseHelper divinationDatabaseHelper = new DivinationDatabaseHelper(this);
     private DatabaseHelper databaseHelper = new DatabaseHelper(this);
     private String findHexagrams = "";
+    private String findRelatingHexagrams = "";
+    private List<Integer> original = new ArrayList<Integer>();
     private ImageView originalImageView = null;
     private ImageView relativeImageView = null;
 
@@ -36,6 +41,14 @@ public class ConsultOracle extends IChingBaseActivity {
                     tossButton.setText("toss");
                     tossAction();
                     counter++;
+                } else {
+                    findHexagrams = "";
+                    findRelatingHexagrams = "";
+                    original = new ArrayList<Integer>();
+                    counter = 0;
+                    setRelatingVisibility(View.INVISIBLE);
+                    setOriginalInvisible();
+                    saveButton.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -46,7 +59,13 @@ public class ConsultOracle extends IChingBaseActivity {
 
                 if (!question.isEmpty()) {
                     Hex hex = (Hex) databaseHelper.getPostDAO().queryForEq("component", findHexagrams).get(0);
-                    DivinationObject divinationObject = new DivinationObject(hex.getImageSource(), question);
+                    int secondImageSource = 0;
+                    if (findHexagrams.equals(findRelatingHexagrams)) {
+                        secondImageSource = R.drawable.icon_iching_logo;
+                    } else {
+                        secondImageSource = databaseHelper.getPostDAO().queryForEq("component", findRelatingHexagrams).get(0).getImageSource();
+                    }
+                    DivinationObject divinationObject = new DivinationObject(hex.getImageSource(), secondImageSource, question, original);
                     divinationDatabaseHelper.getPostDAO().create(divinationObject);
                     saveButton.setVisibility(View.INVISIBLE);
                 } else {
@@ -64,27 +83,28 @@ public class ConsultOracle extends IChingBaseActivity {
             case 0:
                 imageSource = R.drawable.yin;
                 relativeImageSource = R.drawable.yin;
+                findRelatingHexagrams = 0 + findRelatingHexagrams;
                 break;
             case 1:
                 imageSource = R.drawable.yang;
                 relativeImageSource = R.drawable.yang;
+                findRelatingHexagrams = 1 + findRelatingHexagrams;
                 break;
             case 2:
                 imageSource = R.drawable.yin_changing;
-                relativeImageSource = R.drawable.yin_relating;
+                relativeImageSource = R.drawable.yang_relating;
+                findRelatingHexagrams = 1 + findRelatingHexagrams;
                 break;
             case 3:
                 imageSource = R.drawable.yang_changing;
-                relativeImageSource = R.drawable.yang_relating;
+                relativeImageSource = R.drawable.yin_relating;
+                findRelatingHexagrams = 0 + findRelatingHexagrams;
                 break;
         }
-        findHexagrams = findHexagrams + randomNum % 2;
+        findHexagrams = randomNum % 2 + findHexagrams;
+        original.add(randomNum);
         switch (counter) {
             case 0:
-                saveButton.setVisibility(View.INVISIBLE);
-                setRelatingVisibility(View.INVISIBLE);
-                setOriginalInvisible();
-
                 originalImageView = (ImageView) findViewById(R.id.cast1);
                 relativeImageView = (ImageView) findViewById(R.id.relative1);
                 break;
@@ -107,7 +127,6 @@ public class ConsultOracle extends IChingBaseActivity {
             case 5:
                 originalImageView = (ImageView) findViewById(R.id.cast6);
                 relativeImageView = (ImageView) findViewById(R.id.relative6);
-                counter = -1;
                 tossButton.setText("another toss");
                 saveButton.setVisibility(View.VISIBLE);
                 break;
@@ -116,13 +135,16 @@ public class ConsultOracle extends IChingBaseActivity {
         originalImageView.setVisibility(View.VISIBLE);
         originalImageView.setImageResource(imageSource);
         relativeImageView.setImageResource(relativeImageSource);
-        if (counter == -1) {
-            setRelatingVisibility(View.VISIBLE);
+        if (counter == 5) {
+            if (!findHexagrams.equals(findRelatingHexagrams)) {
+                setRelatingVisibility(View.VISIBLE);
+            }
         }
-
     }
 
     private void setOriginalInvisible() {
+        originalImageView = (ImageView) findViewById(R.id.cast1);
+        originalImageView.setVisibility(View.INVISIBLE);
         originalImageView = (ImageView) findViewById(R.id.cast2);
         originalImageView.setVisibility(View.INVISIBLE);
         originalImageView = (ImageView) findViewById(R.id.cast3);
