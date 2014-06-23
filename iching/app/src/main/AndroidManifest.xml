@@ -23,4 +23,5 @@
         <activity android:name=".activity.DivinationActivity" />
         <activity android:name=".activity.LoadDivinationActivity"/>
     </application>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 </manifest>

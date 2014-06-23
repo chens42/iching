@@ -14,6 +14,7 @@ import com.example.iching.app.model.Hex;
 
 public class HexagramFragment  extends Fragment{
     public static final String HEX_IN="hex";
+    public static final String STATE="state";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.hexagram_fragment,container, false);
@@ -21,10 +22,15 @@ public class HexagramFragment  extends Fragment{
         Bundle bundle = getArguments();
         Parcelable parcelable=bundle.getParcelable(HEX_IN);
         Hex hex = (Hex) parcelable;
+        Boolean indicate = bundle.getBoolean(STATE);
         ImageView hexImageView = (ImageView) root.findViewById(R.id.image_source);
         hexImageView.setImageResource(hex.getImageSource());
         TextView description = (TextView) root.findViewById(R.id.description);
-        description.setText(hex.getDescriptionInEnglish());
+        if(indicate){
+            description.setText(hex.getDescriptionInEnglish());
+        }else{
+            description.setText(hex.getDescriptionInMandarin());
+        }
         return root;
     }
 }

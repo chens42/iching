@@ -1,5 +1,7 @@
 package com.example.iching.app.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -22,10 +24,12 @@ public class MainContentActivity extends IChingBaseActivity implements Animation
     private Animation animRotate;
     private ImageView icon;
     private LinearLayout mainContent;
-    Button hexagramsButton;
-    Button consultOracle;
-    Button divination;
-    private PopupWindow popupWindow;
+    private Button hexagramsButton;
+    private Button consultOracle;
+    private Button divination;
+    private Button exitButton;
+    private Button about;
+    private PopupWindow popupWindow ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +64,11 @@ public class MainContentActivity extends IChingBaseActivity implements Animation
                 startActivity(intent);
             }
         });
-        final Button about = (Button) findViewById(R.id.aboutButton);
+        about = (Button) findViewById(R.id.aboutButton);
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setButtonsClickable(false);
-                about.setClickable(false);
                 LayoutInflater inflater = (LayoutInflater)
                         getSystemService(MainContentActivity.this.LAYOUT_INFLATER_SERVICE);
                 LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.about_layout, null, false);
@@ -78,20 +81,60 @@ public class MainContentActivity extends IChingBaseActivity implements Animation
                     @Override
                     public void onClick(View v) {
                         popupWindow.dismiss();
-                        about.setClickable(true);
                         setButtonsClickable(true);
                     }
                 });
             }
         });
+        exitButton = (Button) findViewById(R.id.exitButton);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exitWarning();
+            }
+        });
+    }
+
+    private void exitWarning() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                MainContentActivity.this);
+        alertDialogBuilder.setTitle(null);
+        alertDialogBuilder
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     private void setButtonsClickable(boolean condition) {
+        about.setClickable(condition);
         hexagramsButton.setClickable(condition);
         consultOracle.setClickable(condition);
         divination.setClickable(condition);
+        exitButton.setClickable(condition);
     }
 
+    @Override
+    public void onBackPressed() {
+        if(popupWindow != null ){
+            if (popupWindow.isShowing()) {
+                popupWindow.dismiss();
+                setButtonsClickable(true);
+            }
+        }else {
+            exitWarning();
+        }
+    }
 
     @Override
     public void finish() {

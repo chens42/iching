@@ -1,6 +1,9 @@
 package com.example.iching.app.activity;
 
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.iching.app.R;
+import com.example.iching.app.listener.ShakeEventListener;
 import com.example.iching.app.db.DatabaseHelper;
 import com.example.iching.app.db.DivinationDatabaseHelper;
 import com.example.iching.app.model.DivinationObject;
@@ -28,28 +32,40 @@ public class ConsultOracle extends IChingBaseActivity {
     private ImageView originalImageView = null;
     private ImageView relativeImageView = null;
 
+
+    private SensorManager mSensorManager;
+    private ShakeEventListener mSensorListener;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consult_oracle_layout);
+
+
+        mSensorManager = (SensorManager) getSystemService(ConsultOracle.SENSOR_SERVICE);
+        mSensorListener = new ShakeEventListener();
+
+        mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
+            @Override
+            public void onShake() {
+                if(counter<6){
+                    casting();
+
+
+                    Vibrator v = (Vibrator) ConsultOracle.this.getSystemService(ConsultOracle.this.VIBRATOR_SERVICE);
+
+                    v.vibrate(100);
+                }
+            }
+        });
+
         tossButton = (Button) findViewById(R.id.tossButton);
         saveButton = (Button) findViewById(R.id.saveButton);
         tossButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (counter < 6) {
-                    tossButton.setText("toss");
-                    tossAction();
-                    counter++;
-                } else {
-                    findHexagrams = "";
-                    findRelatingHexagrams = "";
-                    original = new ArrayList<Integer>();
-                    counter = 0;
-                    setRelatingVisibility(View.INVISIBLE);
-                    setOriginalInvisible();
-                    saveButton.setVisibility(View.INVISIBLE);
-                }
+                casting();
             }
         });
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +90,23 @@ public class ConsultOracle extends IChingBaseActivity {
             }
         });
     }
+
+    private void casting() {
+        if (counter < 6) {
+            tossButton.setText("toss");
+            tossAction();
+            counter++;
+        } else {
+            findHexagrams = "";
+            findRelatingHexagrams = "";
+            original = new ArrayList<Integer>();
+            counter = 0;
+            setRelatingVisibility(View.INVISIBLE);
+            setOriginalInvisible();
+            saveButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
 
     private void tossAction() {
         int randomNum = 0 + (int) (Math.random() * 4);
@@ -172,4 +205,17 @@ public class ConsultOracle extends IChingBaseActivity {
         relativeImageView.setVisibility(visibility);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mSensorListener,
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(mSensorListener);
+        super.onPause();
+    }
 }

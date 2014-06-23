@@ -11,4 +11,5 @@
     <color name="dialog_text_color">#000000</color>
     <color name="red">#ffff070e</color>
     <color name="white_80">#CCffffff</color>
+    <color name="gray">#C0C0C0</color>
 </resources>

@@ -44,7 +44,7 @@ public class DivinationActivity extends IChingBaseActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         DivinationActivity.this);
-                alertDialogBuilder.setTitle("Your Title");
+                alertDialogBuilder.setTitle("Delete it?");
                 alertDialogBuilder
                         .setMessage("Delete the current item?")
                         .setCancelable(false)

@@ -63,7 +63,8 @@
 
             <Button
                 style="@style/first_page_button_style"
-                android:text="Exit"/>
+                android:text="Exit"
+                android:id="@+id/exitButton"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

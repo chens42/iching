@@ -4,8 +4,6 @@ package com.example.iching.app.service;
 import android.content.Context;
 import android.media.MediaPlayer;
 
-import java.util.prefs.Preferences;
-
 public class MusicControl {
     //singleton only one mediaPlayer
     private static MediaPlayer mediaPlayer = null;
@@ -41,7 +39,7 @@ public class MusicControl {
     private static void playMusic(Context context, int resource) {
         mediaPlayer = MediaPlayer.create(context, resource);
         mediaPlayer.setLooping(true);
-//        mediaPlayer.start();
+        mediaPlayer.start();
     }
 
 }
