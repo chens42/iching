@@ -1,13 +1,11 @@
 package com.example.iching.app.model;
 
-import android.text.Editable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DivinationObject implements Serializable {
@@ -89,4 +87,20 @@ public class DivinationObject implements Serializable {
     public long getId() {
         return id;
     }
+
+/*    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(question);
+        dest.writeInt(firstElement);
+        dest.writeInt(secondElement);
+        dest.writeInt(thirdElement);
+        dest.writeInt(fourthElement);
+        dest.writeInt(fifthElement);
+        dest.writeInt(sixthElement);
+    }*/
 }

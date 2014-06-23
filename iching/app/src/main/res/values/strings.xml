@@ -9,4 +9,7 @@
     <string name="consult_oracle_description">Enter a question you want to consult IChing with,and  later you can save it.After casting,you can click on hexagrams\'s title to get reading</string>
     <string name="consult_oracle_casting_original_text">Original</string>
     <string name="consult_oracle_casting_relating_text">Relating</string>
+    <string name="old_divination_view_question">Your question</string>
+    <string name="about_description">The I Ching (Wade-giles) also known as the Book of Changes,Classic of Changes;and Zhouyi, is one of hte oldest of the Chinese classic texts.The book contains a divination system comparable to Western geomancy of the West African Ifa system. In Western cultures and modern East Asia, it is still widely used for the purpose.</string>
+    <string name="about_email">123456789@hotmail.com</string>
 </resources>

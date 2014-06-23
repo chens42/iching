@@ -13,19 +13,20 @@ import com.example.iching.app.model.Hex;
 public class PreloadedActivity extends Activity {
 
     private DatabaseHelper helper;
+    Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preloaded_layout);
-        helper=new DatabaseHelper(this);
-        Thread thread = new Thread() {
+        helper = new DatabaseHelper(this);
+        thread = new Thread() {
             @Override
             public void run() {
                 try {
                     if (helper.getPostDAO().queryForAll().isEmpty()) {
                         databaseCreate();
-                    }else{
+                    } else {
                         sleep(3000);
                     }
                     runOnUiThread(new Runnable() {
@@ -44,6 +45,12 @@ public class PreloadedActivity extends Activity {
             }
         };
         thread.start();
+    }
+
+    @Override
+    public void finish() {
+        thread.interrupt();
+        super.finish();
     }
 
     private void databaseCreate() {
@@ -180,6 +187,7 @@ public class PreloadedActivity extends Activity {
 
     class createDatabase extends AsyncTask<Void, Void, Void> {
         private ProgressDialog progressBar;
+
         @Override
         protected Void doInBackground(Void... params) {
             databaseCreate();

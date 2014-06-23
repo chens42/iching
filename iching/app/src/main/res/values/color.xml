@@ -10,4 +10,5 @@
     <color name="white">#ffffff</color>
     <color name="dialog_text_color">#000000</color>
     <color name="red">#ffff070e</color>
+    <color name="white_80">#CCffffff</color>
 </resources>

@@ -6,8 +6,12 @@
         <item name="android:listViewStyle">@style/TransparentListView</item>
         <item name="android:expandableListViewStyle">@style/TransparentExpandableListView</item>
         <item name="android:windowTitleBackgroundStyle">@style/title_style</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="transparent" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@color/title_color</item>
+    </style>
     <style name="TransparentListView" parent="@android:style/Widget.ListView">
         <item name="android:cacheColorHint">@android:color/transparent</item>
     </style>
@@ -66,6 +70,8 @@
         <item name="android:layout_marginRight">50dp</item>
         <item name="android:background">@drawable/transparent_50_button</item>
     </style>
+
+    <style name="preloaded_theme"></style>
 
 
 </resources>
